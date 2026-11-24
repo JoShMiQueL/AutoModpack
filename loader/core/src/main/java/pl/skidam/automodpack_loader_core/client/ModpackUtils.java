@@ -199,6 +199,10 @@ public class ModpackUtils {
 
             if (isMod) { // Make it into standardized mods directory, for support custom launchers
                 runFile = CustomFileUtils.getPath(MODS_DIR, formattedFile.replaceFirst("/mods/", ""));
+            } else if ("self-update".equals(contentItem.type)) {
+                // Suiteland fork: self-update payloads are staged into mods/ by
+                // ModpackUpdater.applySelfUpdate, never mirrored into the cwd tree.
+                continue;
             }
 
             boolean modpackFileExists = Files.exists(modpackFile);
@@ -249,6 +253,7 @@ public class ModpackUtils {
             String formattedFile = contentItem.file;
             Path runFile = CustomFileUtils.getPathFromCWD(formattedFile);
             boolean isMod = "mod".equals(contentItem.type);
+            if ("self-update".equals(contentItem.type)) continue; // Suiteland fork: handled by applySelfUpdate
 
             if (isMod) { // Make it into standardized mods directory, for support custom launchers
                 runFile = CustomFileUtils.getPath(MODS_DIR, formattedFile.replaceFirst("/mods/", ""));

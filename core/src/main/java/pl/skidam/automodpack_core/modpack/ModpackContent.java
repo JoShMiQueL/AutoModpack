@@ -285,7 +285,12 @@ public class ModpackContent {
 
         String type;
 
-        if (FileInspection.isMod(file)) {
+        // Suiteland fork: files under /automodpack-self-update/ inside the served pack dir carry the
+        // replacement jar for AutoModpack itself. They bypass the AutoModpack-mod exclusion below and
+        // the client swaps them into its mods dir before the forced restart.
+        if (formattedFile.startsWith("/automodpack-self-update/") && formattedFile.endsWith(".jar")) {
+            type = "self-update";
+        } else if (FileInspection.isMod(file)) {
             type = "mod";
             if (serverConfig.autoExcludeServerSideMods && Objects.equals(FileInspection.getModEnvironment(file), LoaderManagerService.EnvironmentType.SERVER)) {
                 LOGGER.info("File {} is server mod! Skipping...", formattedFile);

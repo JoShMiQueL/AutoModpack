@@ -425,6 +425,7 @@ public class ModpackUpdater {
     // returns true if restart is required
     private boolean applyModpack() throws Exception {
         ModpackUtils.selectModpack(modpackDir, modpackAddresses, newDownloadedFiles);
+        boolean selfUpdateRestart = applySelfUpdate();
         try { // try catch this error there because we don't want to stop the whole method just because of that
             SecretsStore.saveClientSecret(clientConfig.selectedModpack, modpackSecret);
         } catch (IllegalArgumentException e) {
@@ -504,7 +505,51 @@ public class ModpackUpdater {
 
         boolean needsRestart6 = LauncherVersionSwapper.swapLoaderVersion(modpackContent.loader, modpackContent.loaderVersion);
 
-        return needsRestart0 || needsRestart1 || needsRestart2 || needsRestart3 || needsRestart4 || needsRestart5 || needsRestart6;
+        return selfUpdateRestart || needsRestart0 || needsRestart1 || needsRestart2 || needsRestart3 || needsRestart4 || needsRestart5 || needsRestart6;
+    }
+
+    /**
+     * Suiteland fork: the pack can ship a replacement AutoModpack jar under /automodpack-self-update/
+     * (content type "self-update"). The mod loader refuses to load a second automodpack mod from the
+     * pack, so instead of nested-loading we copy the downloaded jar into the standard mods directory,
+     * mark the currently running jar for deletion on JVM exit, and force the restart that lets the new
+     * build take over. When the sha1 already matches the running jar there is nothing to do.
+     */
+    private boolean applySelfUpdate() throws IOException {
+        boolean needsRestart = false;
+
+        for (Jsons.ModpackContentFields.ModpackContentItem item : serverModpackContent.list) {
+            if (!"self-update".equals(item.type)) {
+                continue;
+            }
+
+            String selfHash = CustomFileUtils.getHash(THIS_MOD_JAR);
+            if (item.sha1.equals(selfHash)) {
+                LOGGER.info("AutoModpack self-update: already on the shipped build, skipping {}", item.file);
+                continue;
+            }
+
+            Path downloadedJar = CustomFileUtils.getPath(modpackDir, item.file);
+            if (!Files.exists(downloadedJar)) {
+                LOGGER.error("AutoModpack self-update: {} not found in the modpack dir after download", item.file);
+                continue;
+            }
+
+            // File name in the pack dir keeps its shipped name; drop it next to the running jar.
+            Path targetJar = THIS_MOD_JAR.getParent().resolve(downloadedJar.getFileName().toString());
+            if (targetJar.equals(THIS_MOD_JAR)) {
+                // Same file name as the running jar: write under a sibling name so the copy never
+                // fights the mapped jar, then delete the old one on exit.
+                targetJar = THIS_MOD_JAR.resolveSibling(THIS_MOD_JAR.getFileName() + ".new.jar");
+            }
+
+            LOGGER.info("AutoModpack self-update: swapping {} -> {}", THIS_MOD_JAR.getFileName(), targetJar.getFileName());
+            CustomFileUtils.copyFile(downloadedJar, targetJar);
+            CustomFileUtils.executeOrder66(THIS_MOD_JAR);
+            needsRestart = true;
+        }
+
+        return needsRestart;
     }
 
     // returns set of formated files which we should not copy to the cwd - let them stay in the modpack directory
