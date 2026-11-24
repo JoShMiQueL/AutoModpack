@@ -285,22 +285,15 @@ public class ModpackContent {
 
         String type;
 
-        // Suiteland fork: files under /automodpack-self-update/ inside the served pack dir carry the
-        // replacement jar for AutoModpack itself. They bypass the AutoModpack-mod exclusion below and
-        // the client swaps them into its mods dir before the forced restart.
-        if (formattedFile.startsWith("/automodpack-self-update/") && formattedFile.endsWith(".jar")) {
-            type = "self-update";
-        } else if (FileInspection.isMod(file)) {
+        if (FileInspection.isMod(file)) {
             type = "mod";
             if (serverConfig.autoExcludeServerSideMods && Objects.equals(FileInspection.getModEnvironment(file), LoaderManagerService.EnvironmentType.SERVER)) {
                 LOGGER.info("File {} is server mod! Skipping...", formattedFile);
                 return null;
             }
-            // Exclude AutoModpack itself
-            var modId = FileInspection.getModID(file);
-            if ((MOD_ID + "_bootstrap").equals(modId) || (MOD_ID + "-bootstrap").equals(modId) || (MOD_ID + "_mod").equals(modId) || MOD_ID.equals(modId)) {
-                return null;
-            }
+            // Suiteland fork: do NOT exclude AutoModpack itself. The pack may ship the fork build in
+            // mods/ like any other mod; the client force-copies it next to the running jar and the
+            // forced restart swaps it in.
         } else if (formattedFile.contains("/config/")) {
             type = "config";
         } else if (formattedFile.contains("/shaderpacks/")) {

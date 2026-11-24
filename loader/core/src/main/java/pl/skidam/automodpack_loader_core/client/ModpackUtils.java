@@ -199,10 +199,6 @@ public class ModpackUtils {
 
             if (isMod) { // Make it into standardized mods directory, for support custom launchers
                 runFile = CustomFileUtils.getPath(MODS_DIR, formattedFile.replaceFirst("/mods/", ""));
-            } else if ("self-update".equals(contentItem.type)) {
-                // Suiteland fork: self-update payloads are staged into mods/ by
-                // ModpackUpdater.applySelfUpdate, never mirrored into the cwd tree.
-                continue;
             }
 
             boolean modpackFileExists = Files.exists(modpackFile);
@@ -233,12 +229,23 @@ public class ModpackUtils {
                 LOGGER.error("File {} doesn't exist!? If you see this please report this to the automodpack repo and attach this log https://github.com/Skidamek/AutoModpack/issues", formattedFile);
                 Thread.dumpStack();
             } else if (!runFileHashMatch) {
-                CustomFileUtils.copyFile(modpackFile, runFile);
-                if (isMod) {
+                // Suiteland fork: the pack can ship the AutoModpack jar itself. When its file name
+                // matches the running jar we cannot overwrite a mapped file - copy the payload next
+                // to it under a .new name and order the running jar deleted on JVM exit.
+                if (isMod && THIS_MOD_JAR != null && runFile.equals(THIS_MOD_JAR)) {
+                    Path staged = THIS_MOD_JAR.resolveSibling(runFile.getFileName() + ".new.jar");
+                    LOGGER.info("AutoModpack update shipped in the pack: staging {} -> {}", modpackFile.getFileName(), staged.getFileName());
+                    CustomFileUtils.copyFile(modpackFile, staged);
+                    CustomFileUtils.executeOrder66(THIS_MOD_JAR);
                     needsRestart = true;
-                    LOGGER.warn("Overwriting mod {} file to modpack version", formattedFile);
                 } else {
-                    LOGGER.info("Overwriting {} file to the modpack version", formattedFile);
+                    CustomFileUtils.copyFile(modpackFile, runFile);
+                    if (isMod) {
+                        needsRestart = true;
+                        LOGGER.warn("Overwriting mod {} file to modpack version", formattedFile);
+                    } else {
+                        LOGGER.info("Overwriting {} file to the modpack version", formattedFile);
+                    }
                 }
             }
         }
@@ -253,7 +260,6 @@ public class ModpackUtils {
             String formattedFile = contentItem.file;
             Path runFile = CustomFileUtils.getPathFromCWD(formattedFile);
             boolean isMod = "mod".equals(contentItem.type);
-            if ("self-update".equals(contentItem.type)) continue; // Suiteland fork: handled by applySelfUpdate
 
             if (isMod) { // Make it into standardized mods directory, for support custom launchers
                 runFile = CustomFileUtils.getPath(MODS_DIR, formattedFile.replaceFirst("/mods/", ""));
