@@ -39,7 +39,9 @@ public class ReLauncher {
      * the vanilla lang system, which already ships full es_* translations and picks by client locale.
      */
     static final class Lang {
-        private static final boolean SPANISH = java.util.Locale.getDefault().getLanguage().equals("es");
+        // getLanguage() returns the bare ISO-639 code with no region or variant, so es_ES, es_MX,
+        // es_AR, es_419, es-ES-u-va-... all collapse to "es" - every Spanish dialect matches.
+        private static final boolean SPANISH = "es".equalsIgnoreCase(java.util.Locale.getDefault().getLanguage());
 
         static String get(String key) {
             if (SPANISH) {
