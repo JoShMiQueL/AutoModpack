@@ -23,14 +23,42 @@ public class ReLauncher {
         this.modpackDir = null;
         this.updateType = updateType;
         this.changelogs = null;
-        this.updateMessage = "Successfully updated AutoModpack!";
+        this.updateMessage = Lang.get("relaunch.self");
     }
 
     public ReLauncher(Path modpackDir, UpdateType updateType, Changelogs changelogs) {
         this.modpackDir = modpackDir;
         this.updateType = updateType;
         this.changelogs = changelogs;
-        this.updateMessage = "Successfully updated the modpack!";
+        this.updateMessage = Lang.get("relaunch.modpack");
+    }
+
+    /**
+     * Suiteland fork: minimal Spanish/English strings for the preload Swing window and its forked
+     * helper, which run before Minecraft (and its language files) load. In-game screens keep using
+     * the vanilla lang system, which already ships full es_* translations and picks by client locale.
+     */
+    static final class Lang {
+        private static final boolean SPANISH = java.util.Locale.getDefault().getLanguage().equals("es");
+
+        static String get(String key) {
+            if (SPANISH) {
+                switch (key) {
+                    case "relaunch.self":    return "¡AutoModpack actualizado correctamente!";
+                    case "relaunch.modpack": return "¡El modpack se actualizó correctamente!";
+                    case "gui.restart":      return "¡Reinicia el juego!";
+                    case "gui.windowTitle":  return "Ventana de AutoModpack";
+                    default:                 return key;
+                }
+            }
+            switch (key) {
+                case "relaunch.self":    return "Successfully updated AutoModpack!";
+                case "relaunch.modpack": return "Successfully updated the modpack!";
+                case "gui.restart":      return "Restart your game!";
+                case "gui.windowTitle":  return "AutoModpack Window";
+                default:                 return key;
+            }
+        }
     }
 
     public final void restart(boolean shutdownInPreload, Runnable... callbacks) {

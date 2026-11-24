@@ -46,7 +46,7 @@ public class Gui {
         frame.setLocation(dim.width / 2 - frame.getSize().width / 2, dim.height / 2 - frame.getSize().height / 2);
         frame.getContentPane().setBackground(new ColorUIResource(22, 27, 34));
 
-        JLabel RestartText = new JLabel("Restart your game!");
+        JLabel RestartText = new JLabel(ReLauncher.Lang.get("gui.restart"));
         RestartText.setBounds(0, 10, 400, 32);
         RestartText.setFont(new Font("Segoe UI", Font.PLAIN, 24));
         RestartText.setForeground(Color.green);
@@ -83,7 +83,7 @@ public class Gui {
         frame.add(OKButton);
         frame.add(CustomText);
         frame.add(RestartText);
-        frame.setTitle("AutoModpack Window");
+        frame.setTitle(ReLauncher.Lang.get("gui.windowTitle"));
         frame.setIconImage(icon);
         frame.setAlwaysOnTop(true);
         frame.setVisible(true);
