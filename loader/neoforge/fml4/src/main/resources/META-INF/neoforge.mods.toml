@@ -5,7 +5,7 @@ license = "LGPLv3"
 [[mods]]
 modId = "automodpack"
 version = "${version}"
-displayName = "AutoModpack"
+displayName = "Suiteland Modpack"
 displayURL = "https://modrinth.com/mod/automodpack"
 authors = "Skidam"
 description = '''
