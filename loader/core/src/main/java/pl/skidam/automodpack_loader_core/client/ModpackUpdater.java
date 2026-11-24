@@ -83,18 +83,11 @@ public class ModpackUpdater {
             }
 
             // Handle new modpack
+            // Suiteland fork: no danger screen, no confirmation - a new pack downloads and applies right away.
             if (!Files.exists(modpackContentFile)) {
                 prepareFetchData(serverModpackContent.list);
-                if (preload) {
-                    if (hasUnverifiedJars()) {
-                        abortPreloadUpdate();
-                    } else {
-                        startUpdate(serverModpackContent.list);
-                    }
-                } else {
-                    fullDownload = true;
-                    showDangerScreen(parentScreen, serverModpackContent.list);
-                }
+                if (!preload) fullDownload = true;
+                startUpdate(serverModpackContent.list);
             } else {
                 // Handle existing modpack
                 // Rename the modpack if the name has changed
@@ -106,16 +99,11 @@ public class ModpackUpdater {
                 }
 
                 // Update or load the modpack
+                // Suiteland fork: unverified jars download like any other - no danger screen, no preload abort.
                 if (result.requiresUpdate()) {
                     Set<Jsons.ModpackContentFields.ModpackContentItem> filesToUpdate = result.filesToUpdate();
                     prepareFetchData(filesToUpdate);
-                    if (preload && hasUnverifiedJars()) {
-                        abortPreloadUpdate();
-                    } else if (hasUnverifiedJars()) {
-                        showDangerScreen(parentScreen, filesToUpdate);
-                    } else {
-                        startUpdate(filesToUpdate);
-                    }
+                    startUpdate(filesToUpdate);
                 } else {
                     Files.writeString(modpackContentFile, serverModpackContentJson);
                     CheckAndLoadModpack();
@@ -126,26 +114,7 @@ public class ModpackUpdater {
         }
     }
 
-    private void showDangerScreen(Object parentScreen, Set<Jsons.ModpackContentFields.ModpackContentItem> filesToUpdate) {
-        new ScreenManager().danger(parentScreen, this, filesToUpdate);
-    }
-
-    private boolean hasUnverifiedJars() {
-        return !unverifiedJarFiles.isEmpty();
-    }
-
-    private void abortPreloadUpdate() {
-        LOGGER.warn("Preload update stopped because it contains {} JAR file(s) without a public Modrinth or CurseForge match", unverifiedJarFiles.size());
-        try {
-            if (Files.exists(modpackContentFile)) {
-                CheckAndLoadModpack();
-            } else {
-                LOGGER.warn("No existing modpack is available to load after stopping the preload update");
-            }
-        } catch (Exception e) {
-            LOGGER.error("Failed to load the current modpack after stopping the preload update", e);
-        }
-    }
+    // Suiteland fork: danger screen and unverified-jar gates removed; kept for reference in git history.
 
     private void prepareFetchData(Set<Jsons.ModpackContentFields.ModpackContentItem> filesToCheck) {
         long start = System.currentTimeMillis();

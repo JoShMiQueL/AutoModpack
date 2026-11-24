@@ -30,6 +30,10 @@ public class SelfUpdater {
     public static boolean update(Jsons.ModpackContentFields serverModpackContent) {
         if (LOADER_MANAGER.isDevelopmentEnvironment()) return false;
 
+        // Suiteland fork: the self-updater swaps in the *official* Modrinth build, which would overwrite
+        // this fork and restore every prompt it removed. Client-side it never runs.
+        if (LOADER_MANAGER.getEnvironmentType() == LoaderManagerService.EnvironmentType.CLIENT) return false;
+
         if (LOADER_MANAGER.getEnvironmentType() == LoaderManagerService.EnvironmentType.SERVER && !serverConfig.selfUpdater) {
             LOGGER.info("AutoModpack self-updater is disabled in server config.");
             return false;

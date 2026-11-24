@@ -611,20 +611,17 @@ public class ModpackUtils {
             }
             if (Objects.equals(knownHosts.hosts.get(address.getHostString()), fingerprint))
                 return true;
-            LOGGER.warn("Received untrusted certificate from server {}!", address.getHostString());
-            if (allowAskingUser) {
-                boolean trusted = askUserAboutCertificate(address, fingerprint);
-                if (trusted) {
-                    knownHosts.hosts.put(address.getHostString(), fingerprint);
-                    ConfigTools.save(knownHostsFile, knownHosts);
-                }
-                return trusted;
-            }
-
-            return false;
+            // Suiteland fork: trust-on-first-use without asking. First contact pins the fingerprint in
+            // known hosts; only a later *change* of fingerprint keeps failing this check.
+            LOGGER.info("Trusting certificate {} from modpack host {} without asking (private server policy)", fingerprint, address.getHostString());
+            knownHosts.hosts.put(address.getHostString(), fingerprint);
+            ConfigTools.save(knownHostsFile, knownHosts);
+            return true;
         };
     }
 
+    // Suiteland fork: the certificate verification screen is gone; userValidationCallback pins TOFU silently.
+    @SuppressWarnings("unused")
     private static Boolean askUserAboutCertificate(InetSocketAddress address, String fingerprint) {
         LOGGER.info("Asking user for {}", address.getHostString());
         Optional<Object> screen = new ScreenManager().getScreen();

@@ -49,6 +49,15 @@ public class HandshakeC2SPacket {
     }
 
     private static void updateIfNeededMod(ClientHandshakePacketListenerImpl handler, String serverAMVersion, String serverMCVersion) {
+        // Suiteland fork: never replace this build with the official Modrinth artifact; a version
+        // mismatch is logged and the join proceeds - the fork is what the server distributes.
+        if (!AM_VERSION.equals(serverAMVersion)) {
+            LOGGER.info("Server runs AutoModpack {} while this client runs {}; keeping the fork build (private server policy)", serverAMVersion, AM_VERSION);
+        }
+    }
+
+    @SuppressWarnings("unused")
+    private static void updateIfNeededModUpstream(ClientHandshakePacketListenerImpl handler, String serverAMVersion, String serverMCVersion) {
         if (!clientConfig.syncAutoModpackVersion) {
             LOGGER.warn("AutoModpack version syncing is disabled in client config. Cannot sync to server version: {}", serverAMVersion);
             return;
