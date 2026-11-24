@@ -16,7 +16,6 @@ public class RestartScreen extends VersionedScreen {
     private final Path modpackDir;
     private final UpdateType updateType;
     private final Changelogs changelogs;
-    private static Button cancelButton;
     private static Button restartButton;
     private static Button changelogsButton;
 
@@ -37,7 +36,6 @@ public class RestartScreen extends VersionedScreen {
 
         initWidgets();
 
-        this.addRenderableWidget(cancelButton);
         this.addRenderableWidget(restartButton);
         this.addRenderableWidget(changelogsButton);
 
@@ -49,19 +47,9 @@ public class RestartScreen extends VersionedScreen {
     public void initWidgets() {
         assert this.minecraft != null;
 
-        cancelButton = buttonWidget(
-            this.width / 2 - 155,
-            this.height / 2 + 50,
-            150,
-            20,
-            VersionedText.translatable("automodpack.restart.cancel"),
-            button -> {
-                this.minecraft.gui.setScreen(null);
-            }
-        );
-
+        // Suiteland fork: no cancel button - restarting is the only way out once updates applied.
         restartButton = buttonWidget(
-            this.width / 2 + 5,
+            this.width / 2 - 75,
             this.height / 2 + 50,
             150,
             20,
