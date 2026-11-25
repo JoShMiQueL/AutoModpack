@@ -10,8 +10,8 @@ import pl.skidam.automodpack_core.protocol.netty.NettyServer;
 import java.nio.file.Path;
 
 public class GlobalVariables {
-    public static final Logger LOGGER = LogManager.getLogger("Suiteland-Modpack");
-    public static final String MOD_ID = "automodpack"; // For real its "automodpack_mod" but we use this for resource locations etc.
+    public static final Logger LOGGER = LogManager.getLogger("Suiteland-Updater");
+    public static final String MOD_ID = "suiteland_updater"; // resource locations, lang keys, channels
     public static Boolean DEBUG = false;
     public static Boolean preload;
     public static String MC_VERSION;

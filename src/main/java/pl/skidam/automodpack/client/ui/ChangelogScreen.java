@@ -82,7 +82,7 @@ public class ChangelogScreen extends VersionedScreen {
             this.height - 30,
             140,
             20,
-            VersionedText.translatable("automodpack.back"),
+            VersionedText.translatable("suiteland_updater.back"),
             button -> this.minecraft.gui.setScreen(this.parent)
         );
 
@@ -91,7 +91,7 @@ public class ChangelogScreen extends VersionedScreen {
             this.height - 30,
             140,
             20,
-            VersionedText.translatable("automodpack.changelog.openPage"),
+            VersionedText.translatable("suiteland_updater.changelog.openPage"),
             button -> {
                 ListEntry selectedEntry = listEntryWidget.getSelected();
 

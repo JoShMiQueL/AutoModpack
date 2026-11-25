@@ -27,13 +27,13 @@ public class Preload {
     public Preload() {
         try {
             long start = System.currentTimeMillis();
-            LOGGER.info("Prelaunching AutoModpack...");
+            LOGGER.info("Prelaunching Suiteland Updater...");
             initializeGlobalVariables();
             loadConfigs();
             FetchCache.useDirectory(automodpackDir.resolve("fetch-cache"));
             OneCrl.startRefresh();
             updateAll();
-            LOGGER.info("AutoModpack prelaunched! took " + (System.currentTimeMillis() - start) + "ms");
+            LOGGER.info("Suiteland Updater prelaunched! took " + (System.currentTimeMillis() - start) + "ms");
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);

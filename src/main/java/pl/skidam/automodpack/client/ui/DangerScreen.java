@@ -77,7 +77,7 @@ public class DangerScreen extends VersionedScreen {
             buttonY,
             140,
             20,
-            VersionedText.translatable("automodpack.danger.cancel").withStyle(ChatFormatting.BOLD),
+            VersionedText.translatable("suiteland_updater.danger.cancel").withStyle(ChatFormatting.BOLD),
             button -> this.minecraft.gui.setScreen(parent)
         );
         this.addRenderableWidget(this.cancelButton);
@@ -88,8 +88,8 @@ public class DangerScreen extends VersionedScreen {
             140,
             20,
             VersionedText.translatable(hasUnverifiedJars
-                    ? "automodpack.danger.unverified.confirm"
-                    : "automodpack.danger.confirm").withStyle(ChatFormatting.RED),
+                    ? "suiteland_updater.danger.unverified.confirm"
+                    : "suiteland_updater.danger.confirm").withStyle(ChatFormatting.RED),
             button -> confirmDownload()
         );
         this.confirmButton.active = !hasUnverifiedJars || acknowledged;
@@ -126,7 +126,7 @@ public class DangerScreen extends VersionedScreen {
 
     private net.minecraft.network.chat.MutableComponent acknowledgementText() {
         var text = VersionedText.literal(acknowledged ? "[x] " : "[ ] ")
-                .append(VersionedText.translatable("automodpack.danger.acknowledge"));
+                .append(VersionedText.translatable("suiteland_updater.danger.acknowledge"));
         if (ticksRemaining > 0) {
             text.append(VersionedText.literal(" (" + getRemainingSeconds() + "s)"));
         }
@@ -173,26 +173,26 @@ public class DangerScreen extends VersionedScreen {
         int center = this.height / 2;
 
         drawLine(matrices, titleKey(), center - 66, TextColors.WHITE, true);
-        drawLine(matrices, "automodpack.danger.description", center - 45, TextColors.WHITE, false);
-        drawLine(matrices, "automodpack.danger.secDescription", center - 33, TextColors.WHITE, false);
-        drawLine(matrices, "automodpack.danger.thiDescription", center - 21, TextColors.WHITE, false);
-        drawLine(matrices, "automodpack.danger.warning1", center - 3, TextColors.WHITE, false);
-        drawLine(matrices, "automodpack.danger.warning7", center + 9, TextColors.WHITE, false);
+        drawLine(matrices, "suiteland_updater.danger.description", center - 45, TextColors.WHITE, false);
+        drawLine(matrices, "suiteland_updater.danger.secDescription", center - 33, TextColors.WHITE, false);
+        drawLine(matrices, "suiteland_updater.danger.thiDescription", center - 21, TextColors.WHITE, false);
+        drawLine(matrices, "suiteland_updater.danger.warning1", center - 3, TextColors.WHITE, false);
+        drawLine(matrices, "suiteland_updater.danger.warning7", center + 9, TextColors.WHITE, false);
     }
 
     private void renderUnverifiedJarWarning(VersionedMatrices matrices) {
         int center = this.height / 2;
 
         drawLine(matrices, titleKey(), center - 100, TextColors.WHITE, true);
-        drawLine(matrices, "automodpack.danger.unverified.description", center - 86, TextColors.WHITE, false);
-        drawLine(matrices, "automodpack.danger.unverified.secDescription", center - 74, TextColors.LIGHT_RED, false);
-        drawLine(matrices, "automodpack.danger.unverified.thiDescription", center - 62, TextColors.LIGHT_RED, false);
-        drawLine(matrices, "automodpack.danger.unverified.warning1", center - 45, TextColors.LIGHT_RED, false);
-        drawLine(matrices, "automodpack.danger.unverified.warning2", center - 34, TextColors.WHITE, false);
-        drawLine(matrices, "automodpack.danger.unverified.warning3", center - 17, TextColors.WHITE, false);
-        drawLine(matrices, "automodpack.danger.unverified.warning4", center - 5, TextColors.LIGHT_RED, false);
-        drawLine(matrices, "automodpack.danger.unverified.warning5", center + 7, TextColors.WHITE, false);
-        drawLine(matrices, "automodpack.danger.unverified.files", center + 24, TextColors.LIGHT_RED, false,
+        drawLine(matrices, "suiteland_updater.danger.unverified.description", center - 86, TextColors.WHITE, false);
+        drawLine(matrices, "suiteland_updater.danger.unverified.secDescription", center - 74, TextColors.LIGHT_RED, false);
+        drawLine(matrices, "suiteland_updater.danger.unverified.thiDescription", center - 62, TextColors.LIGHT_RED, false);
+        drawLine(matrices, "suiteland_updater.danger.unverified.warning1", center - 45, TextColors.LIGHT_RED, false);
+        drawLine(matrices, "suiteland_updater.danger.unverified.warning2", center - 34, TextColors.WHITE, false);
+        drawLine(matrices, "suiteland_updater.danger.unverified.warning3", center - 17, TextColors.WHITE, false);
+        drawLine(matrices, "suiteland_updater.danger.unverified.warning4", center - 5, TextColors.LIGHT_RED, false);
+        drawLine(matrices, "suiteland_updater.danger.unverified.warning5", center + 7, TextColors.WHITE, false);
+        drawLine(matrices, "suiteland_updater.danger.unverified.files", center + 24, TextColors.LIGHT_RED, false,
                 unverifiedJarNames.size());
 
         int fileY = center + 35;
@@ -209,15 +209,15 @@ public class DangerScreen extends VersionedScreen {
         }
 
         if (unverifiedJarNames.size() > displayedFiles) {
-            drawLine(matrices, "automodpack.danger.unverified.more", fileY + displayedFiles * 10,
+            drawLine(matrices, "suiteland_updater.danger.unverified.more", fileY + displayedFiles * 10,
                     TextColors.WHITE, false, unverifiedJarNames.size() - displayedFiles);
         }
     }
 
     private String titleKey() {
         return modpackUpdaterInstance.fullDownload
-                ? "automodpack.danger"
-                : "automodpack.danger.unverified";
+                ? "suiteland_updater.danger"
+                : "suiteland_updater.danger.unverified";
     }
 
     private void drawLine(VersionedMatrices matrices, String key, int y, int color, boolean bold, Object... args) {

@@ -35,14 +35,14 @@ public class SelfUpdater {
         if (LOADER_MANAGER.getEnvironmentType() == LoaderManagerService.EnvironmentType.CLIENT) return false;
 
         if (LOADER_MANAGER.getEnvironmentType() == LoaderManagerService.EnvironmentType.SERVER && !serverConfig.selfUpdater) {
-            LOGGER.info("AutoModpack self-updater is disabled in server config.");
+            LOGGER.info("Suiteland Updater self-updater is disabled in server config.");
             return false;
         }
 
         boolean gettingServerVersion = serverModpackContent != null && serverModpackContent.automodpackVersion != null && !serverModpackContent.automodpackVersion.isBlank();
 
         if (!gettingServerVersion && LOADER_MANAGER.getEnvironmentType() == LoaderManagerService.EnvironmentType.CLIENT && !clientConfig.selfUpdater) {
-            LOGGER.info("AutoModpack self-updater is disabled in client config.");
+            LOGGER.info("Suiteland Updater self-updater is disabled in client config.");
             return false;
         }
 

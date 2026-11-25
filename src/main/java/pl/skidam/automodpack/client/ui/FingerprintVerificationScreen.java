@@ -19,8 +19,8 @@ public class FingerprintVerificationScreen extends VersionedScreen {
     private final Runnable canceledCallback;
     private boolean validated = false;
     private final Toast failedToast = new SystemToast(SystemToast.SystemToastId.PACK_LOAD_FAILURE, 
-            VersionedText.translatable("automodpack.validation.failed"), 
-            VersionedText.translatable("automodpack.retry"));
+            VersionedText.translatable("suiteland_updater.validation.failed"), 
+            VersionedText.translatable("suiteland_updater.retry"));
     private EditBox textField;
     private Button backButton;
     private Button verifyButton;
@@ -60,7 +60,7 @@ public class FingerprintVerificationScreen extends VersionedScreen {
 
         // Back button (left)
         this.backButton = buttonWidget(this.width / 2 - 155, this.height / 2 + 80, 100, 20,
-                VersionedText.translatable("automodpack.back"),
+                VersionedText.translatable("suiteland_updater.back"),
                 button -> {
                     this.minecraft.gui.setScreen(parent);
                     if (!this.validated) {
@@ -71,7 +71,7 @@ public class FingerprintVerificationScreen extends VersionedScreen {
 
         // Skip verification button (middle)
         this.skipButton = buttonWidget(this.width / 2 - 50, this.height / 2 + 80, 100, 20,
-                VersionedText.translatable("automodpack.skip"),
+                VersionedText.translatable("suiteland_updater.skip"),
                 button -> {
                     assert this.minecraft != null;
                     this.minecraft.gui.setScreen(new SkipVerificationScreen(this, this.parent, this.validatedCallback));
@@ -79,7 +79,7 @@ public class FingerprintVerificationScreen extends VersionedScreen {
 
         // Verify button (right - primary action, bold)
         this.verifyButton = buttonWidget(this.width / 2 + 55, this.height / 2 + 80, 100, 20,
-                VersionedText.translatable("automodpack.validation.verify").withStyle(ChatFormatting.BOLD),
+                VersionedText.translatable("suiteland_updater.validation.verify").withStyle(ChatFormatting.BOLD),
                 button -> verifyFingerprint());
 
         // Wiki button (icon button aligned to the right of text field)
@@ -87,7 +87,7 @@ public class FingerprintVerificationScreen extends VersionedScreen {
                 button -> Util.getPlatform().openUri("https://moddedmc.wiki/en/project/automodpack/latest/docs/technicals/certificate"),
                 "link");
 
-        setTooltip(wikiButton, VersionedText.translatable("automodpack.learnmore"));
+        setTooltip(wikiButton, VersionedText.translatable("suiteland_updater.learnmore"));
     }
 
     private void verifyFingerprint() {
@@ -126,22 +126,22 @@ public class FingerprintVerificationScreen extends VersionedScreen {
         
         // Title
         drawCenteredTextWithShadow(matrices, this.font, 
-                VersionedText.translatable("automodpack.validation.title").withStyle(ChatFormatting.BOLD),
+                VersionedText.translatable("suiteland_updater.validation.title").withStyle(ChatFormatting.BOLD),
                 this.width / 2, this.height / 2 - 85, TextColors.WHITE);
 
         // Description line 1
         drawCenteredTextWithShadow(matrices, this.font, 
-                VersionedText.translatable("automodpack.validation.description1"),
+                VersionedText.translatable("suiteland_updater.validation.description1"),
                 this.width / 2, this.height / 2 - 65, TextColors.WHITE);
 
         // Description line 2
         drawCenteredTextWithShadow(matrices, this.font, 
-                VersionedText.translatable("automodpack.validation.description2"),
+                VersionedText.translatable("suiteland_updater.validation.description2"),
                 this.width / 2, this.height / 2 - 65 + lineHeight, TextColors.WHITE);
 
         // Server fingerprint label
         drawCenteredTextWithShadow(matrices, this.font, 
-                VersionedText.translatable("automodpack.validation.fingerprint.label"),
+                VersionedText.translatable("suiteland_updater.validation.fingerprint.label"),
                 this.width / 2, this.height / 2 - 35, TextColors.WHITE);
 
         // Server fingerprint value (concatenated, gray, not bold - intentionally harder to read)
@@ -151,7 +151,7 @@ public class FingerprintVerificationScreen extends VersionedScreen {
 
         // Confirmation text
         drawCenteredTextWithShadow(matrices, this.font, 
-                VersionedText.translatable("automodpack.validation.confirm.text"),
+                VersionedText.translatable("suiteland_updater.validation.confirm.text"),
                 this.width / 2, this.height / 2 - 15 + lineHeight, TextColors.WHITE);
     }
 

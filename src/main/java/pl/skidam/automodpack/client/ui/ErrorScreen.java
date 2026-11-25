@@ -36,7 +36,7 @@ public class ErrorScreen extends VersionedScreen {
             this.height / 2 + 50,
             200,
             20,
-            VersionedText.translatable("automodpack.back"),
+            VersionedText.translatable("suiteland_updater.back"),
             button -> {
                 assert minecraft != null;
                 minecraft.gui.setScreen(null);
@@ -50,7 +50,7 @@ public class ErrorScreen extends VersionedScreen {
 
         // Title with error indicator
         drawCenteredTextWithShadow(matrices, this.font,
-            VersionedText.literal("[AutoModpack] Error! ").append(VersionedText.translatable("automodpack.error").withStyle(ChatFormatting.RED)),
+            VersionedText.literal("[AutoModpack] Error! ").append(VersionedText.translatable("suiteland_updater.error").withStyle(ChatFormatting.RED)),
             this.width / 2,
             this.height / 2 - 50,
             TextColors.WHITE

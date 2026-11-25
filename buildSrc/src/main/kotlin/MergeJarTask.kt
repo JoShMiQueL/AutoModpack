@@ -73,7 +73,7 @@ abstract class MergeJarTask : DefaultTask() {
             }
 
             // Add mod jar.
-            zipStream.putNextEntry(ZipEntry("META-INF/jarjar/automodpack-mod.jar"))
+            zipStream.putNextEntry(ZipEntry("META-INF/jarjar/suiteland-updater-mod.jar"))
             FileInputStream(jarToMerge).buffered().use { it.copyTo(zipStream) }
             zipStream.closeEntry()
 

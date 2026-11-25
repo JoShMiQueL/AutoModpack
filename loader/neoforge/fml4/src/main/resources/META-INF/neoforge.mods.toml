@@ -3,9 +3,9 @@ loaderVersion = "[1,)"
 license = "LGPLv3"
 
 [[mods]]
-modId = "automodpack"
+modId = "suiteland_updater"
 version = "${version}"
-displayName = "Suiteland Modpack"
+displayName = "Suiteland Updater"
 displayURL = "https://modrinth.com/mod/automodpack"
 authors = "Skidam"
 description = '''

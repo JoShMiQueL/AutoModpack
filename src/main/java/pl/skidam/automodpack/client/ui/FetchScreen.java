@@ -29,7 +29,7 @@ public class FetchScreen extends VersionedScreen {
 
     private void initWidgets() {
         cancelButton = buttonWidget(this.width / 2 - 60, this.height / 2 + 80, 120, 20,
-            VersionedText.translatable("automodpack.cancel"),
+            VersionedText.translatable("suiteland_updater.cancel"),
             button -> {
                 cancelButton.active = false;
                 cancelFetch();
@@ -56,7 +56,7 @@ public class FetchScreen extends VersionedScreen {
         drawCenteredTextWithShadow(
             matrices,
             this.font,
-            VersionedText.translatable("automodpack.fetch").withStyle(
+            VersionedText.translatable("suiteland_updater.fetch").withStyle(
                 ChatFormatting.BOLD
             ),
             this.width / 2,
@@ -68,7 +68,7 @@ public class FetchScreen extends VersionedScreen {
         drawCenteredTextWithShadow(
             matrices,
             this.font,
-            VersionedText.translatable("automodpack.wait"),
+            VersionedText.translatable("suiteland_updater.wait"),
             this.width / 2,
             this.height / 2 - 60 + lineHeight * 2,
             TextColors.WHITE
@@ -78,7 +78,7 @@ public class FetchScreen extends VersionedScreen {
         drawCenteredTextWithShadow(
             matrices,
             this.font,
-            VersionedText.translatable("automodpack.fetch.found", getFetchesDone()),
+            VersionedText.translatable("suiteland_updater.fetch.found", getFetchesDone()),
             this.width / 2,
             this.height / 2 - 60 + lineHeight * 4,
             TextColors.WHITE

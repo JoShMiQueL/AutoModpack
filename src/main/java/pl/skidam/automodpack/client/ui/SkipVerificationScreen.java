@@ -17,8 +17,8 @@ public class SkipVerificationScreen extends VersionedScreen {
     private final Screen parent;
     private final Runnable validatedCallback;
     private final Toast failedToast = new SystemToast(SystemToast.SystemToastId.PACK_LOAD_FAILURE,
-            VersionedText.translatable("automodpack.validation.skip.failed"), 
-            VersionedText.translatable("automodpack.retry"));
+            VersionedText.translatable("suiteland_updater.validation.skip.failed"), 
+            VersionedText.translatable("suiteland_updater.retry"));
     private static final String REQUIRED_TEXT = "I accept the risk";
     private static final int TIMER_SECONDS = 10;
     private EditBox textField;
@@ -57,7 +57,7 @@ public class SkipVerificationScreen extends VersionedScreen {
         this.textField.setMaxLength(128);
 
         this.backButton = buttonWidget(this.width / 2 - 155, this.height / 2 + 80, 150, 20,
-                VersionedText.translatable("automodpack.back"),
+                VersionedText.translatable("suiteland_updater.back"),
                 button -> {
                     assert this.minecraft != null;
                     this.minecraft.gui.setScreen(verificationScreen);
@@ -65,7 +65,7 @@ public class SkipVerificationScreen extends VersionedScreen {
         );
 
         this.confirmButton = buttonWidget(this.width / 2 + 5, this.height / 2 + 80, 150, 20,
-                VersionedText.translatable("automodpack.skip"),
+                VersionedText.translatable("suiteland_updater.skip"),
                 button -> confirmSkip());
         this.confirmButton.active = false;
         updateButtonText();
@@ -74,15 +74,15 @@ public class SkipVerificationScreen extends VersionedScreen {
                 button -> Util.getPlatform().openUri("https://moddedmc.wiki/en/project/automodpack/latest/docs/technicals/certificate"),
                 "link");
 
-        setTooltip(wikiButton, VersionedText.translatable("automodpack.learnmore"));
+        setTooltip(wikiButton, VersionedText.translatable("suiteland_updater.learnmore"));
     }
     
     private void updateButtonText() {
         if (ticksRemaining > 0) {
             int seconds = getRemainingSeconds();
-            this.confirmButton.setMessage(VersionedText.translatable("automodpack.skip").append(VersionedText.literal(" (" + seconds + "s)")));
+            this.confirmButton.setMessage(VersionedText.translatable("suiteland_updater.skip").append(VersionedText.literal(" (" + seconds + "s)")));
         } else {
-            this.confirmButton.setMessage(VersionedText.translatable("automodpack.skip"));
+            this.confirmButton.setMessage(VersionedText.translatable("suiteland_updater.skip"));
         }
     }
 
@@ -129,27 +129,27 @@ public class SkipVerificationScreen extends VersionedScreen {
         
         // Warning title
         drawCenteredTextWithShadow(matrices, this.font, 
-                VersionedText.translatable("automodpack.validation.skip.title").withStyle(ChatFormatting.BOLD),
+                VersionedText.translatable("suiteland_updater.validation.skip.title").withStyle(ChatFormatting.BOLD),
                 this.width / 2, this.height / 2 - 85, TextColors.LIGHT_RED);
 
         // Warning message line 1
         drawCenteredTextWithShadow(matrices, this.font, 
-                VersionedText.translatable("automodpack.validation.skip.warning1"),
+                VersionedText.translatable("suiteland_updater.validation.skip.warning1"),
                 this.width / 2, this.height / 2 - 65, TextColors.WHITE);
 
         // Warning message line 2
         drawCenteredTextWithShadow(matrices, this.font, 
-                VersionedText.translatable("automodpack.validation.skip.warning2"),
+                VersionedText.translatable("suiteland_updater.validation.skip.warning2"),
                 this.width / 2, this.height / 2 - 65 + lineHeight, TextColors.LIGHT_RED);
 
         // Instructions
         drawCenteredTextWithShadow(matrices, this.font, 
-                VersionedText.translatable("automodpack.validation.skip.instruction"),
+                VersionedText.translatable("suiteland_updater.validation.skip.instruction"),
                 this.width / 2, this.height / 2 - 35, TextColors.WHITE);
 
         // Confirmation prompt
         drawCenteredTextWithShadow(matrices, this.font,
-                VersionedText.translatable("automodpack.validation.skip.confirm.text"),
+                VersionedText.translatable("suiteland_updater.validation.skip.confirm.text"),
                 this.width / 2, this.height / 2 - 10, TextColors.WHITE);
 
         // Required text to type (displayed prominently)

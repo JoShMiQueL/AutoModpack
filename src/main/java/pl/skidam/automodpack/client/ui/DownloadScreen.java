@@ -64,7 +64,7 @@ public class DownloadScreen extends VersionedScreen {
     private void initWidgets() {
         cancelButton = addRenderableWidget(
             buttonWidget(this.width / 2 - 60, this.height / 2 + 80, 120, 20,
-                VersionedText.translatable("automodpack.cancel"),
+                VersionedText.translatable("suiteland_updater.cancel"),
                 button -> {
                     cancelButton.active = false;
                     cancelDownload();
@@ -106,7 +106,7 @@ public class DownloadScreen extends VersionedScreen {
     private Component getStage() {
         if (lastStage.equals("-1")) {
             return VersionedText.translatable(
-                "automodpack.download.calculating"
+                "suiteland_updater.download.calculating"
             );
         }
         return VersionedText.literal(lastStage);
@@ -115,7 +115,7 @@ public class DownloadScreen extends VersionedScreen {
     private Component getPercentage() {
         if (lastPercentage == -1) {
             return VersionedText.translatable(
-                "automodpack.download.calculating"
+                "suiteland_updater.download.calculating"
             );
         }
         return VersionedText.literal(lastPercentage + "%");
@@ -124,7 +124,7 @@ public class DownloadScreen extends VersionedScreen {
     private Component getTotalDownloadSpeed() {
         if (lastSpeed.equals("-1")) {
             return VersionedText.translatable(
-                "automodpack.download.calculating"
+                "suiteland_updater.download.calculating"
             );
         }
         return VersionedText.literal(lastSpeed);
@@ -133,10 +133,10 @@ public class DownloadScreen extends VersionedScreen {
     private Component getTotalETA() {
         if (lastETA.equals("-1")) {
             return VersionedText.translatable(
-                "automodpack.download.calculating"
+                "suiteland_updater.download.calculating"
             );
         }
-        return VersionedText.translatable("automodpack.download.eta", lastETA); // Time left: %s
+        return VersionedText.translatable("suiteland_updater.download.eta", lastETA); // Time left: %s
     }
 
     private float getDownloadScale() {
@@ -156,7 +156,7 @@ public class DownloadScreen extends VersionedScreen {
                 matrices,
                 this.font,
                 VersionedText.translatable(
-                    "automodpack.download.downloading"
+                    "suiteland_updater.download.downloading"
                 ).withStyle(ChatFormatting.BOLD),
                 this.width / 2,
                 y,
@@ -183,7 +183,7 @@ public class DownloadScreen extends VersionedScreen {
             drawCenteredTextWithShadow(
                 matrices,
                 this.font,
-                VersionedText.translatable("automodpack.download.noFiles"),
+                VersionedText.translatable("suiteland_updater.download.noFiles"),
                 (int) (((float) this.width / 2) * scale),
                 y,
                 TextColors.WHITE
@@ -191,7 +191,7 @@ public class DownloadScreen extends VersionedScreen {
             drawCenteredTextWithShadow(
                 matrices,
                 this.font,
-                VersionedText.translatable("automodpack.wait").withStyle(
+                VersionedText.translatable("suiteland_updater.wait").withStyle(
                     ChatFormatting.BOLD
                 ),
                 (int) (((float) this.width / 2) * scale),

@@ -400,7 +400,7 @@ public class ModpackUpdater {
                     failedFiles.append(item.file);
                 }
 
-                new ScreenManager().error("automodpack.error.files", "Failed to download: " + failedFiles, "automodpack.error.logs");
+                new ScreenManager().error("suiteland_updater.error.files", "Failed to download: " + failedFiles, "suiteland_updater.error.logs");
                 LOGGER.error("Update failed successfully! Try again! Took: {}ms", System.currentTimeMillis() - start);
             } else if (preload) {
                 LOGGER.info("Update completed! Took: {}ms", System.currentTimeMillis() - start);
@@ -416,7 +416,7 @@ public class ModpackUpdater {
         } catch (InterruptedException e) {
             LOGGER.info("Interrupted the download");
         } catch (Exception e) {
-            new ScreenManager().error("automodpack.error.critical", "\"" + e.getMessage() + "\"", "automodpack.error.logs");
+            new ScreenManager().error("suiteland_updater.error.critical", "\"" + e.getMessage() + "\"", "suiteland_updater.error.logs");
             e.printStackTrace();
         }
     }

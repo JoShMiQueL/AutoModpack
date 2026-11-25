@@ -18,14 +18,14 @@ import net.neoforged.neoforge.event.RegisterCommandsEvent;
 
 import static pl.skidam.automodpack_core.GlobalVariables.*;
 
-@Mod(MOD_ID + "_mod")
+@Mod(MOD_ID)
 public class NeoForgeInit {
     public NeoForgeInit(IEventBus eventBus) {
          preload = false;
          ScreenManager.INSTANCE = new ScreenImpl();
 
          long start = System.currentTimeMillis();
-         LOGGER.info("Launching AutoModpack...");
+         LOGGER.info("Launching Suiteland Updater...");
 
          Common.init();
 
@@ -37,13 +37,13 @@ public class NeoForgeInit {
          }
 
 
-         LOGGER.info("AutoModpack launched! took " + (System.currentTimeMillis() - start) + "ms");
+         LOGGER.info("Suiteland Updater launched! took " + (System.currentTimeMillis() - start) + "ms");
     }
 
 /^? if >1.20.5 {^/
-   @EventBusSubscriber(modid = MOD_ID + "_mod")
+   @EventBusSubscriber(modid = MOD_ID)
 /^?} else {^/
-   /^@Mod.EventBusSubscriber(modid = MOD_ID + "_mod")
+   /^@Mod.EventBusSubscriber(modid = MOD_ID)
 ^//^?}^/
     public static class events {
         @SubscribeEvent

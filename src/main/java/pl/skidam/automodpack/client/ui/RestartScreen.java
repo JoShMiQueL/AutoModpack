@@ -53,7 +53,7 @@ public class RestartScreen extends VersionedScreen {
             this.height / 2 + 50,
             150,
             20,
-            VersionedText.translatable("automodpack.restart.confirm").withStyle(
+            VersionedText.translatable("suiteland_updater.restart.confirm").withStyle(
                 ChatFormatting.BOLD
             ),
             button -> {
@@ -66,7 +66,7 @@ public class RestartScreen extends VersionedScreen {
             this.height / 2 + 75,
             150,
             20,
-            VersionedText.translatable("automodpack.changelog.view"),
+            VersionedText.translatable("suiteland_updater.changelog.view"),
             button -> {
                 new ScreenManager().changelog(this, modpackDir, changelogs);
             }
@@ -79,7 +79,7 @@ public class RestartScreen extends VersionedScreen {
 
         // Title
         drawCenteredTextWithShadow(matrices, this.font,
-            VersionedText.translatable("automodpack.restart." + updateType.toString()).withStyle(ChatFormatting.BOLD),
+            VersionedText.translatable("suiteland_updater.restart." + updateType.toString()).withStyle(ChatFormatting.BOLD),
             this.width / 2,
             this.height / 2 - 60,
             TextColors.WHITE
@@ -89,7 +89,7 @@ public class RestartScreen extends VersionedScreen {
         drawCenteredTextWithShadow(
             matrices,
             this.font,
-            VersionedText.translatable("automodpack.restart.description"),
+            VersionedText.translatable("suiteland_updater.restart.description"),
             this.width / 2,
             this.height / 2 - 60 + lineHeight * 3,
             TextColors.WHITE
@@ -99,7 +99,7 @@ public class RestartScreen extends VersionedScreen {
         drawCenteredTextWithShadow(
             matrices,
             this.font,
-            VersionedText.translatable("automodpack.restart.secDescription"),
+            VersionedText.translatable("suiteland_updater.restart.secDescription"),
             this.width / 2,
             this.height / 2 - 60 + lineHeight * 4,
             TextColors.WHITE

@@ -2,7 +2,7 @@
   "waiting_music": {
     "sounds": [
       {
-        "name": "automodpack:music/theelevatorbossanova",
+        "name": "suiteland_updater:music/theelevatorbossanova",
         "stream": false
       }
     ]

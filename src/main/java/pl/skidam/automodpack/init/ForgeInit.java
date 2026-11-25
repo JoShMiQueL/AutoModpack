@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.Mod;
 
 import static pl.skidam.automodpack_core.GlobalVariables.*;
 
-@Mod(MOD_ID + "_mod")
+@Mod(MOD_ID)
 public class ForgeInit {
 
     public ForgeInit() {
@@ -23,7 +23,7 @@ public class ForgeInit {
         ScreenManager.INSTANCE = new ScreenImpl();
 
         long start = System.currentTimeMillis();
-        LOGGER.info("Launching AutoModpack...");
+        LOGGER.info("Launching Suiteland Updater...");
 
          Common.init();
 
@@ -35,10 +35,10 @@ public class ForgeInit {
         }
 
 
-        LOGGER.info("AutoModpack launched! took " + (System.currentTimeMillis() - start) + "ms");
+        LOGGER.info("Suiteland Updater launched! took " + (System.currentTimeMillis() - start) + "ms");
     }
 
-    @Mod.EventBusSubscriber(modid = MOD_ID + "_mod")
+    @Mod.EventBusSubscriber(modid = MOD_ID)
     public static class events {
         @SubscribeEvent
         public static void onCommandsRegister(RegisterCommandsEvent event) {

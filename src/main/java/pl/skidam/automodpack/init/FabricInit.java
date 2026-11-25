@@ -19,7 +19,7 @@ public class FabricInit {
         ScreenManager.INSTANCE = new ScreenImpl();
 
         long start = System.currentTimeMillis();
-        LOGGER.info("Launching AutoModpack...");
+        LOGGER.info("Launching Suiteland Updater...");
 
         Common.init();
 
@@ -34,7 +34,7 @@ public class FabricInit {
        Commands.register(dispatcher);
    });
 
-        LOGGER.info("AutoModpack launched! took " + (System.currentTimeMillis() - start) + "ms");
+        LOGGER.info("Suiteland Updater launched! took " + (System.currentTimeMillis() - start) + "ms");
     }
 }
 /*?}*/
