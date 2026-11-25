@@ -20,7 +20,7 @@ public class ConfigUtils {
         Set<String> fixedForceCopyFilesToStandardLocation = new HashSet<>(config.forceCopyFilesToStandardLocation.size());
         Map<String, String> fixedNonModpackFilesToDelete = new HashMap<>(config.nonModpackFilesToDelete.size());
 
-        String prefixPattern = "^/?automodpack/host-modpack/[^/]+/";
+        String prefixPattern = "^/?suiteland_updater/host-modpack/[^/]+/";
         Pattern pattern = Pattern.compile(prefixPattern);
 
         for (var file : config.syncedFiles) {
@@ -34,7 +34,7 @@ public class ConfigUtils {
                 continue;
             }
             if (pattern.matcher(trimmed).find()) {
-                LOGGER.info("Removed redundant syncedFiles entry '{}': paths under '/automodpack/host-modpack/' are implicitly synced.", file);
+                LOGGER.info("Removed redundant syncedFiles entry '{}': paths under '/suiteland_updater/host-modpack/' are implicitly synced.", file);
             } else {
                 fixedSyncedFiles.add(prefixSlash(file));
             }
@@ -52,7 +52,7 @@ public class ConfigUtils {
             }
             var fixed = pattern.matcher(trimmed).replaceFirst("");
             if (!fixed.equals(trimmed)) {
-                LOGGER.info("Normalized allowEditsInFiles entry: '{}' -> '{}'. Removed '/automodpack/host-modpack/' prefix.", file, fixed);
+                LOGGER.info("Normalized allowEditsInFiles entry: '{}' -> '{}'. Removed '/suiteland_updater/host-modpack/' prefix.", file, fixed);
             }
             fixedAllowEditsInFiles.add(prefixSlash(fixed));
         }
@@ -69,7 +69,7 @@ public class ConfigUtils {
             }
             var fixed = pattern.matcher(trimmed).replaceFirst("");
             if (!fixed.equals(trimmed)) {
-                LOGGER.info("Normalized forceCopyFilesToStandardLocation entry: '{}' -> '{}'. Removed '/automodpack/host-modpack/' prefix.", file, fixed);
+                LOGGER.info("Normalized forceCopyFilesToStandardLocation entry: '{}' -> '{}'. Removed '/suiteland_updater/host-modpack/' prefix.", file, fixed);
             }
             fixedForceCopyFilesToStandardLocation.add(prefixSlash(fixed));
         }
@@ -88,7 +88,7 @@ public class ConfigUtils {
             }
             var fixed = pattern.matcher(trimmed).replaceFirst("");
             if (!fixed.equals(trimmed)) {
-                LOGGER.info("Normalized nonModpackFilesToDelete entry: '{}' -> '{}'. Removed '/automodpack/host-modpack/' prefix.", file, fixed);
+                LOGGER.info("Normalized nonModpackFilesToDelete entry: '{}' -> '{}'. Removed '/suiteland_updater/host-modpack/' prefix.", file, fixed);
             }
             fixedNonModpackFilesToDelete.put(prefixSlash(fixed), hash);
         }

@@ -250,7 +250,7 @@ public class ModpackContent {
         String formattedFile = CustomFileUtils.formatPath(file, MODPACK_DIR);
 
         // modpackFile is relative path to ~/.minecraft/ (content format) so if it starts with /automodpack/ we dont want it
-        if (formattedFile.startsWith("/automodpack/")) {
+        if (formattedFile.startsWith("/suiteland_updater/")) {
             return null;
         }
 

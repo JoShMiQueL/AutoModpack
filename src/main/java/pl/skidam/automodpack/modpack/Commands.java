@@ -28,7 +28,7 @@ public class Commands {
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         var automodpackNode = dispatcher.register(
-                literal("automodpack")
+                literal("suiteland_updater")
                         .executes(Commands::about)
                         .then(literal("generate")
                                 .requires((source) -> source.permissions().hasPermission(new Permission.HasCommandLevel(PermissionLevel.byId(3))))

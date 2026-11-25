@@ -712,7 +712,7 @@ public class ModpackUtils {
             if (segment.equals("..")) return true; // Directory traversal
         }
 
-        if (normalized.startsWith("automodpack/") || normalized.startsWith("/automodpack/")) {
+        if (normalized.startsWith("suiteland_updater/") || normalized.startsWith("/suiteland_updater/")) {
             return true; // Trying to mess with automodpack internal files
         }
 

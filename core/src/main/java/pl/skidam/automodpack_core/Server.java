@@ -24,7 +24,7 @@ public class Server {
             return;
         }
 
-        FetchCache.useDirectory(Path.of(System.getProperty("user.dir")).resolve("automodpack").resolve("fetch-cache"));
+        FetchCache.useDirectory(Path.of(System.getProperty("user.dir")).resolve("suiteland_updater").resolve("fetch-cache"));
         OneCrl.startRefresh();
 
         NettyServer server = new NettyServer();
@@ -37,8 +37,8 @@ public class Server {
 
         modpackDir.toFile().mkdirs();
 
-        hostModpackContentFile = modpackDir.resolve("automodpack-content.json");
-        serverConfigFile = modpackDir.resolve("automodpack-server.json");
+        hostModpackContentFile = modpackDir.resolve("suiteland_updater-content.json");
+        serverConfigFile = modpackDir.resolve("suiteland_updater-server.json");
         serverCoreConfigFile = modpackDir.resolve("automodpack-core.json");
 
         serverConfig = ConfigTools.load(serverConfigFile, Jsons.ServerConfigFieldsV2.class);

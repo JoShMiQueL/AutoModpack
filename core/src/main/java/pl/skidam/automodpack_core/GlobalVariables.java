@@ -28,30 +28,30 @@ public class GlobalVariables {
     public static Jsons.ServerConfigFieldsV2 serverConfig;
     public static Jsons.ClientConfigFieldsV2 clientConfig;
     public static Jsons.KnownHostsFields knownHosts;
-    public static final Path automodpackDir = Path.of("automodpack");
+    public static final Path automodpackDir = Path.of("suiteland_updater");
     public static final Path hostModpackDir = automodpackDir.resolve("host-modpack");
     // TODO More server modpacks
     // Main - required
     // Addons - optional addon packs
     // Switches - optional or required packs, chosen by the player, only one can be installed at a time
     public static final Path hostContentModpackDir = hostModpackDir.resolve("main");
-    public static Path hostModpackContentFile = hostModpackDir.resolve("automodpack-content.json");
-    public static Path serverConfigFile = automodpackDir.resolve("automodpack-server.json");
-    public static Path clientLocalMetadataFile = automodpackDir.resolve("automodpack-client-metadata.json");
-    public static Path clientDummyFilesFile = automodpackDir.resolve("automodpack-dummy-files.json");
-    public static Path clientDeletionTimeStamps = automodpackDir.resolve("automodpack-deletion-timestamps-files.json");
-    public static Path serverCoreConfigFile = automodpackDir.resolve("automodpack-core.json");
+    public static Path hostModpackContentFile = hostModpackDir.resolve("suiteland_updater-content.json");
+    public static Path serverConfigFile = automodpackDir.resolve("suiteland_updater-server.json");
+    public static Path clientLocalMetadataFile = automodpackDir.resolve("suiteland_updater-client-metadata.json");
+    public static Path clientDummyFilesFile = automodpackDir.resolve("suiteland_updater-dummy-files.json");
+    public static Path clientDeletionTimeStamps = automodpackDir.resolve("suiteland_updater-deletion-timestamps-files.json");
+    public static Path serverCoreConfigFile = automodpackDir.resolve("suiteland_updater-core.json");
     public static final Path privateDir = automodpackDir.resolve(".private");
-    public static final Path serverSecretsFile = privateDir.resolve("automodpack-secrets.json");
-    public static final Path knownHostsFile = privateDir.resolve("automodpack-known-hosts.json");
+    public static final Path serverSecretsFile = privateDir.resolve("suiteland_updater-secrets.json");
+    public static final Path knownHostsFile = privateDir.resolve("suiteland_updater-known-hosts.json");
     public static final Path serverCertFile = privateDir.resolve("cert.crt");
     public static final Path serverPrivateKeyFile = privateDir.resolve("key.pem");
 
 
     // Client
-    public static final Path modpackContentTempFile = automodpackDir.resolve("automodpack-content.json.temp");
-    public static final Path clientConfigFile = automodpackDir.resolve("automodpack-client.json");
-    public static final Path clientSecretsFile = privateDir.resolve("automodpack-client-secrets.json");
+    public static final Path modpackContentTempFile = automodpackDir.resolve("suiteland_updater-content.json.temp");
+    public static final Path clientConfigFile = automodpackDir.resolve("suiteland_updater-client.json");
+    public static final Path clientSecretsFile = privateDir.resolve("suiteland_updater-client-secrets.json");
     public static final Path modpacksDir = automodpackDir.resolve("modpacks");
 
     public static Path selectedModpackDir;
