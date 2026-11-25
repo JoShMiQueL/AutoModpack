@@ -138,10 +138,10 @@ public class NettyServer {
             Class<? extends ServerChannel> socketChannelClass;
             if (Epoll.isAvailable()) {
                 socketChannelClass = EpollServerSocketChannel.class;
-                eventLoopGroup = new EpollEventLoopGroup(new CustomThreadFactoryBuilder().setNameFormat("AutoModpack Epoll Server IO #%d").setDaemon(true).build());
+                eventLoopGroup = new EpollEventLoopGroup(new CustomThreadFactoryBuilder().setNameFormat("SuitelandUpdater Epoll Server IO #%d").setDaemon(true).build());
             } else {
                 socketChannelClass = NioServerSocketChannel.class;
-                eventLoopGroup = new NioEventLoopGroup(new CustomThreadFactoryBuilder().setNameFormat("AutoModpack Server IO #%d").setDaemon(true).build());
+                eventLoopGroup = new NioEventLoopGroup(new CustomThreadFactoryBuilder().setNameFormat("SuitelandUpdater Server IO #%d").setDaemon(true).build());
             }
 
             new TrafficShaper(eventLoopGroup);

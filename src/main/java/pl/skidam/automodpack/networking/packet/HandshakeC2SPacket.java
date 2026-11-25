@@ -52,14 +52,14 @@ public class HandshakeC2SPacket {
         // Suiteland fork: never replace this build with the official Modrinth artifact; a version
         // mismatch is logged and the join proceeds - the fork is what the server distributes.
         if (!AM_VERSION.equals(serverAMVersion)) {
-            LOGGER.info("Server runs AutoModpack {} while this client runs {}; keeping the fork build (private server policy)", serverAMVersion, AM_VERSION);
+            LOGGER.info("Server runs SuitelandUpdater {} while this client runs {}; keeping the fork build (private server policy)", serverAMVersion, AM_VERSION);
         }
     }
 
     @SuppressWarnings("unused")
     private static void updateIfNeededModUpstream(ClientHandshakePacketListenerImpl handler, String serverAMVersion, String serverMCVersion) {
         if (!clientConfig.syncAutoModpackVersion) {
-            LOGGER.warn("AutoModpack version syncing is disabled in client config. Cannot sync to server version: {}", serverAMVersion);
+            LOGGER.warn("SuitelandUpdater version syncing is disabled in client config. Cannot sync to server version: {}", serverAMVersion);
             return;
         }
 
@@ -78,19 +78,19 @@ public class HandshakeC2SPacket {
             currentVersion = SemanticVersion.parse(AM_VERSION);
             serverVersion = SemanticVersion.parse(serverAMVersion);
         } catch (IllegalArgumentException exception) {
-            LOGGER.warn("Cannot compare AutoModpack versions. Server: {}: Client: {}", serverAMVersion, AM_VERSION);
+            LOGGER.warn("Cannot compare SuitelandUpdater versions. Server: {}: Client: {}", serverAMVersion, AM_VERSION);
             return;
         }
 
         LOGGER.warn("Versions mismatch. Server: {}: Client: {}", serverAMVersion, AM_VERSION);
 
         if (serverVersion.compareTo(currentVersion) <= 0) {
-            LOGGER.info("Keeping installed AutoModpack {}. The server cannot downgrade this client to {}.",
+            LOGGER.info("Keeping installed SuitelandUpdater {}. The server cannot downgrade this client to {}.",
                     AM_VERSION, serverAMVersion);
             return;
         }
 
-        LOGGER.info("Syncing AutoModpack to server version: {}", serverAMVersion);
+        LOGGER.info("Syncing SuitelandUpdater to server version: {}", serverAMVersion);
 
         ModrinthAPI automodpack = ModrinthAPI.getModSpecificVersion(SelfUpdater.AUTOMODPACK_ID, serverAMVersion, MC_VERSION);
 

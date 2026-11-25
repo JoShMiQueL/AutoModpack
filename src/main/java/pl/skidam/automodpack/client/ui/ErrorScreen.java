@@ -50,7 +50,7 @@ public class ErrorScreen extends VersionedScreen {
 
         // Title with error indicator
         drawCenteredTextWithShadow(matrices, this.font,
-            VersionedText.literal("[AutoModpack] Error! ").append(VersionedText.translatable("suiteland_updater.error").withStyle(ChatFormatting.RED)),
+            VersionedText.literal("[SuitelandUpdater] Error! ").append(VersionedText.translatable("suiteland_updater.error").withStyle(ChatFormatting.RED)),
             this.width / 2,
             this.height / 2 - 50,
             TextColors.WHITE

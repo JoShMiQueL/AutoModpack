@@ -63,9 +63,9 @@ public class HandshakeS2CPacket {
 
         if (!understood) {
             Common.players.put(playerName, false);
-            LOGGER.warn("{} has not installed AutoModpack.", playerName);
+            LOGGER.warn("{} has not installed SuitelandUpdater.", playerName);
             if (serverConfig.requireAutoModpackOnClient) {
-                Component reason = VersionedText.literal("AutoModpack mod for " + LOADER_MANAGER.getPlatformType().toString().toLowerCase() + " modloader is required to play on this server!");
+                Component reason = VersionedText.literal("SuitelandUpdater mod for " + LOADER_MANAGER.getPlatformType().toString().toLowerCase() + " modloader is required to play on this server!");
                 connection.send(new ClientboundLoginDisconnectPacket(reason));
                 connection.disconnect(reason);
             }
@@ -77,7 +77,7 @@ public class HandshakeS2CPacket {
 
     private static void handleHandshake(Connection connection, GameProfile profile, FriendlyByteBuf buf, PacketSender sender) {
         try {
-            LOGGER.info("{} has installed AutoModpack.", GameHelpers.getPlayerName(profile));
+            LOGGER.info("{} has installed SuitelandUpdater.", GameHelpers.getPlayerName(profile));
 
             String clientResponse = buf.readUtf(Short.MAX_VALUE);
             HandshakePacket clientHandshakePacket = HandshakePacket.fromJson(clientResponse);
@@ -96,9 +96,9 @@ public class HandshakeS2CPacket {
             );
 
             if (!isAcceptedLoader || !isAcceptedVersion) {
-                Component reason = VersionedText.literal("AutoModpack version mismatch! Install " + AM_VERSION + " version of AutoModpack mod for " + LOADER_MANAGER.getPlatformType().toString().toLowerCase() + " to play on this server!");
+                Component reason = VersionedText.literal("SuitelandUpdater version mismatch! Install " + AM_VERSION + " version of SuitelandUpdater mod for " + LOADER_MANAGER.getPlatformType().toString().toLowerCase() + " to play on this server!");
                 if (isClientVersionHigher(clientHandshakePacket.amVersion)) {
-                    reason = VersionedText.literal("You are using a more recent version of AutoModpack than the server. Please contact the server administrator to update the AutoModpack mod.");
+                    reason = VersionedText.literal("You are using a more recent version of SuitelandUpdater than the server. Please contact the server administrator to update the SuitelandUpdater mod.");
                 }
                 connection.send(new ClientboundLoginDisconnectPacket(reason));
                 connection.disconnect(reason);
@@ -111,7 +111,7 @@ public class HandshakeS2CPacket {
             }
 
             if (modpackExecutor.isGenerating()) {
-                Component reason = VersionedText.literal("AutoModpack is generating modpack. Please wait a moment and try again.");
+                Component reason = VersionedText.literal("SuitelandUpdater is generating modpack. Please wait a moment and try again.");
                 connection.send(new ClientboundLoginDisconnectPacket(reason));
                 connection.disconnect(reason);
                 return;

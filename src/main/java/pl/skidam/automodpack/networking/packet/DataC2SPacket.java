@@ -48,7 +48,7 @@ public class DataC2SPacket {
             InetSocketAddress serverAddress = ModPackets.getOriginalServerAddress();
             ModPackets.setOriginalServerAddress(null); // Reset for next server reconnection
             if (serverAddress == null) {
-                LOGGER.error("Server address is null! Something gone very wrong! Please report this issue! https://github.com/Skidamek/AutoModpack/issues");
+                LOGGER.error("Server address is null! Something gone very wrong! Please report this issue! https://github.com/Skidamek/SuitelandUpdater/issues");
                 return CompletableFuture.completedFuture(new FriendlyByteBuf(Unpooled.buffer()));
             }
 

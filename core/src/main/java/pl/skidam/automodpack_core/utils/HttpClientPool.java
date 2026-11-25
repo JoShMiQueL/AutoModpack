@@ -52,7 +52,7 @@ public final class HttpClientPool {
 	 */
 	static final Duration EXCHANGE_DEADLINE = NetUtils.NETWORK_TIMEOUT.multipliedBy(2);
 	private static final ScheduledExecutorService EXCHANGE_DEADLINES = Executors.newSingleThreadScheduledExecutor(
-			new CustomThreadFactoryBuilder().setNameFormat("AutoModpackHttpExchangeDeadline").setDaemon(true).build());
+			new CustomThreadFactoryBuilder().setNameFormat("SuitelandUpdaterHttpExchangeDeadline").setDaemon(true).build());
 	private static final SSLContext HTTPS_CONTEXT = httpsContext();
 	private static final HttpClient DIRECT_CLIENT = client(HttpClient.Redirect.NEVER);
 	private static final HttpClient REDIRECT_CLIENT = client(HttpClient.Redirect.NORMAL);
@@ -74,7 +74,7 @@ public final class HttpClientPool {
 		try {
 			return requestWithRetry(url, headers, body, followRedirects ? REDIRECT_CLIENT : DIRECT_CLIENT);
 		} catch (BodyRefusedException refused) {
-			LOGGER.warn("{}: past AutoModpack's {} MiB / {} s cap, so this answer is unavailable; a CA CRL refused here leaves the server certificate's revocation undecided", refused.getMessage(),
+			LOGGER.warn("{}: past SuitelandUpdater's {} MiB / {} s cap, so this answer is unavailable; a CA CRL refused here leaves the server certificate's revocation undecided", refused.getMessage(),
 					MAX_BODY_BYTES / (1024 * 1024), EXCHANGE_DEADLINE.toSeconds());
 			throw refused;
 		}
@@ -245,7 +245,7 @@ public final class HttpClientPool {
 	private static HttpClient client(HttpClient.Redirect redirects) {
 		// Daemon pool threads: a parked client must never hold the JVM open.
 		return HttpClient.newBuilder().version(HttpClient.Version.HTTP_2).followRedirects(redirects).connectTimeout(NetUtils.NETWORK_TIMEOUT).sslContext(HTTPS_CONTEXT)
-				.executor(Executors.newCachedThreadPool(new CustomThreadFactoryBuilder().setNameFormat("AutoModpackHttpClient-%d").setDaemon(true).build())).build();
+				.executor(Executors.newCachedThreadPool(new CustomThreadFactoryBuilder().setNameFormat("SuitelandUpdaterHttpClient-%d").setDaemon(true).build())).build();
 	}
 
 	private static SSLContext httpsContext() {

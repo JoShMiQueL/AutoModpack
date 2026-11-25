@@ -22,7 +22,7 @@ public class AddressHelpers {
             }
         }
 
-        LOGGER.error("AutoModpack couldn't get your public IP address, please configure it manually.");
+        LOGGER.error("SuitelandUpdater couldn't get your public IP address, please configure it manually.");
         return null;
     }
 

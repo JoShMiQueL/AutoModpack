@@ -11,7 +11,7 @@ import java.util.concurrent.*;
 import static pl.skidam.automodpack_core.GlobalVariables.*;
 
 public class ModpackExecutor {
-    private final ThreadPoolExecutor CREATION_EXECUTOR = (ThreadPoolExecutor) Executors.newFixedThreadPool(Math.max(1, Runtime.getRuntime().availableProcessors() * 2), new CustomThreadFactoryBuilder().setNameFormat("AutoModpackCreation-%d").build());
+    private final ThreadPoolExecutor CREATION_EXECUTOR = (ThreadPoolExecutor) Executors.newFixedThreadPool(Math.max(1, Runtime.getRuntime().availableProcessors() * 2), new CustomThreadFactoryBuilder().setNameFormat("SuitelandUpdaterCreation-%d").build());
     public final Map<String, ModpackContent> modpacks = Collections.synchronizedMap(new HashMap<>());
 
     private ModpackContent init() {

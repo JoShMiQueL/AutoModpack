@@ -226,7 +226,7 @@ public class ModpackUtils {
                     LOGGER.warn("Applying workaround for {} mod", formattedFile);
                 }
             } else if (!modpackFileExists) { // This should never happen, since we previously verified that whole modpack is downloaded
-                LOGGER.error("File {} doesn't exist!? If you see this please report this to the automodpack repo and attach this log https://github.com/Skidamek/AutoModpack/issues", formattedFile);
+                LOGGER.error("File {} doesn't exist!? If you see this please report this to the automodpack repo and attach this log https://github.com/Skidamek/SuitelandUpdater/issues", formattedFile);
                 Thread.dumpStack();
             } else if (!runFileHashMatch) {
                 // Suiteland fork: the pack can ship the AutoModpack jar itself. When its file name
@@ -234,7 +234,7 @@ public class ModpackUtils {
                 // to it under a .new name and order the running jar deleted on JVM exit.
                 if (isMod && THIS_MOD_JAR != null && runFile.equals(THIS_MOD_JAR)) {
                     Path staged = THIS_MOD_JAR.resolveSibling(runFile.getFileName() + ".new.jar");
-                    LOGGER.info("AutoModpack update shipped in the pack: staging {} -> {}", modpackFile.getFileName(), staged.getFileName());
+                    LOGGER.info("SuitelandUpdater update shipped in the pack: staging {} -> {}", modpackFile.getFileName(), staged.getFileName());
                     CustomFileUtils.copyFile(modpackFile, staged);
                     CustomFileUtils.executeOrder66(THIS_MOD_JAR);
                     needsRestart = true;
@@ -598,7 +598,7 @@ public class ModpackUtils {
         try (DownloadClient client = DownloadClient.tryCreate(modpackAddresses, null, 1, null)) {
             return client != null;
         } catch (Exception e) {
-            LOGGER.error("Error while pinging AutoModpack host server", e);
+            LOGGER.error("Error while pinging SuitelandUpdater host server", e);
         }
 
         return false;

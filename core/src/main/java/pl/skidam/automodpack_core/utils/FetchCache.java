@@ -34,7 +34,7 @@ import java.util.function.Function;
 public final class FetchCache {
 
 	public static final Duration MAX_AGE = Duration.ofHours(6);
-	private static final ExecutorService FETCHES = Executors.newCachedThreadPool(new CustomThreadFactoryBuilder().setNameFormat("AutoModpackFetchCache-%d").setDaemon(true).build());
+	private static final ExecutorService FETCHES = Executors.newCachedThreadPool(new CustomThreadFactoryBuilder().setNameFormat("SuitelandUpdaterFetchCache-%d").setDaemon(true).build());
 	private static volatile FetchCache shared = new FetchCache(null);
 
 	private final Path directory;

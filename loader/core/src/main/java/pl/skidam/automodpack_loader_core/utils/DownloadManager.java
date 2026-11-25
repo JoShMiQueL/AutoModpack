@@ -22,7 +22,7 @@ import static pl.skidam.automodpack_core.GlobalVariables.*;
 public class DownloadManager {
     private static final int MAX_DOWNLOADS_IN_PROGRESS = 5;
     private static final int MAX_DOWNLOAD_ATTEMPTS = 2; // its actually 3, but we start from 0
-    private final ExecutorService DOWNLOAD_EXECUTOR = Executors.newFixedThreadPool(MAX_DOWNLOADS_IN_PROGRESS, new CustomThreadFactoryBuilder().setNameFormat("AutoModpackDownload-%d").build());
+    private final ExecutorService DOWNLOAD_EXECUTOR = Executors.newFixedThreadPool(MAX_DOWNLOADS_IN_PROGRESS, new CustomThreadFactoryBuilder().setNameFormat("SuitelandUpdaterDownload-%d").build());
     private DownloadClient downloadClient = null;
     private boolean cancelled = false;
     private final Map<FileInspection.HashPathPair, QueuedDownload> queuedDownloads = new ConcurrentHashMap<>();

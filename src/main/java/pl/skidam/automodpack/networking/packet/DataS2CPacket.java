@@ -37,24 +37,24 @@ public class DataS2CPacket {
 
             if ("true".equals(clientHasUpdate)) { // disconnect
                 LOGGER.warn("{} has not installed modpack. Certificate fingerprint: {}", GameHelpers.getPlayerName(profile), hostServer.getCertificateFingerprint());
-                Component reason = VersionedText.literal("[AutoModpack] Install/Update modpack to join");
+                Component reason = VersionedText.literal("[SuitelandUpdater] Install/Update modpack to join");
                 Connection connection = ((ServerLoginNetworkHandlerAccessor) handler).getConnection();
                 connection.send(new ClientboundLoginDisconnectPacket(reason));
                 connection.disconnect(reason);
             } else if ("false".equals(clientHasUpdate)) {
                 LOGGER.info("{} has installed whole modpack", GameHelpers.getPlayerName(profile));
             } else {
-                Component reason = VersionedText.literal("[AutoModpack] Host server error. Please contact server administrator to check the server logs!");
+                Component reason = VersionedText.literal("[SuitelandUpdater] Host server error. Please contact server administrator to check the server logs!");
                 Connection connection = ((ServerLoginNetworkHandlerAccessor) handler).getConnection();
                 connection.send(new ClientboundLoginDisconnectPacket(reason));
                 connection.disconnect(reason);
 
-                LOGGER.error("Host server error. AutoModpack host server is down or server is not configured correctly");
+                LOGGER.error("Host server error. SuitelandUpdater host server is down or server is not configured correctly");
 
                 if (serverConfig.bindPort == -1) {
-                    LOGGER.warn("You are hosting AutoModpack host server on the Minecraft port.");
+                    LOGGER.warn("You are hosting SuitelandUpdater host server on the Minecraft port.");
                 } else {
-                    LOGGER.warn("Please check if AutoModpack host server (TCP) port '{}' is forwarded / opened correctly", serverConfig.bindPort);
+                    LOGGER.warn("Please check if SuitelandUpdater host server (TCP) port '{}' is forwarded / opened correctly", serverConfig.bindPort);
                 }
 
                 LOGGER.warn("Make sure that 'addressToSend' is correctly set in the config file!");

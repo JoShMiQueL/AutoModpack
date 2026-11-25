@@ -115,7 +115,7 @@ public class NetUtils {
         long now = System.currentTimeMillis();
         Date startDate = new Date(now);
 
-        X500Name dnName = new X500Name("CN=AutoModpack Self Signed Certificate");
+        X500Name dnName = new X500Name("CN=SuitelandUpdater Self Signed Certificate");
         BigInteger certSerialNumber = new BigInteger(Long.toString(now)); // <-- Using the current timestamp as the certificate serial number
 
         Calendar calendar = Calendar.getInstance();

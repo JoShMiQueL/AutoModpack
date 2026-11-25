@@ -46,18 +46,18 @@ public class ReLauncher {
         static String get(String key) {
             if (SPANISH) {
                 switch (key) {
-                    case "relaunch.self":    return "¡AutoModpack actualizado correctamente!";
+                    case "relaunch.self":    return "¡SuitelandUpdater actualizado correctamente!";
                     case "relaunch.modpack": return "¡El modpack se actualizó correctamente!";
                     case "gui.restart":      return "¡Reinicia el juego!";
-                    case "gui.windowTitle":  return "Ventana de AutoModpack";
+                    case "gui.windowTitle":  return "Ventana de SuitelandUpdater";
                     default:                 return key;
                 }
             }
             switch (key) {
-                case "relaunch.self":    return "Successfully updated AutoModpack!";
+                case "relaunch.self":    return "Successfully updated SuitelandUpdater!";
                 case "relaunch.modpack": return "Successfully updated the modpack!";
                 case "gui.restart":      return "Restart your game!";
-                case "gui.windowTitle":  return "AutoModpack Window";
+                case "gui.windowTitle":  return "SuitelandUpdater Window";
                 default:                 return key;
             }
         }

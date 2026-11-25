@@ -23,7 +23,7 @@ public class EarlyModLocator extends AbstractJarFileModLocator {
     @Override
     public Stream<Path> scanCandidates() {
         ProgressMeter progress = StartupNotificationManager.prependProgressBar(
-            "[Automodpack] Preload",
+            "[SuitelandUpdater] Preload",
             0
         );
         new Preload();

@@ -122,7 +122,7 @@ public class Commands {
             if (tempServerConfig != null) {
                 ConfigUtils.normalizeServerConfig(tempServerConfig, true);
                 serverConfig = tempServerConfig;
-                send(context, "AutoModpack server config reloaded!", ChatFormatting.GREEN, true);
+                send(context, "SuitelandUpdater server config reloaded!", ChatFormatting.GREEN, true);
             } else {
                 send(context, "Error while reloading config file!", ChatFormatting.RED, true);
             }
@@ -198,7 +198,7 @@ public class Commands {
     }
 
     private static int about(CommandContext<CommandSourceStack> context) {
-        send(context, "AutoModpack", ChatFormatting.GREEN, AM_VERSION, ChatFormatting.WHITE, false);
+        send(context, "SuitelandUpdater", ChatFormatting.GREEN, AM_VERSION, ChatFormatting.WHITE, false);
         send(context, "/automodpack generate", ChatFormatting.YELLOW, false);
         send(context, "/automodpack host start/stop/restart/connections/fingerprint", ChatFormatting.YELLOW, false);
         send(context, "/automodpack config reload", ChatFormatting.YELLOW, false);

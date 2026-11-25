@@ -70,8 +70,8 @@ public class Jsons {
         public boolean autoExcludeUnnecessaryFiles = true;
         public boolean requireAutoModpackOnClient = true;
         public boolean nagUnModdedClients = true;
-        public String nagMessage = "This server provides dedicated modpack through AutoModpack!";
-        public String nagClickableMessage = "Click here to get the AutoModpack!";
+        public String nagMessage = "This server provides dedicated modpack through SuitelandUpdater!";
+        public String nagClickableMessage = "Click here to get the SuitelandUpdater!";
         public String nagClickableLink = "https://modrinth.com/project/automodpack";
         public boolean autoExcludeServerSideMods = true;
         public boolean hostModpackOnMinecraftPort = true;
@@ -100,8 +100,8 @@ public class Jsons {
         public boolean autoExcludeUnnecessaryFiles = true;
         public boolean requireAutoModpackOnClient = true;
         public boolean nagUnModdedClients = true;
-        public String nagMessage = "This server provides dedicated modpack through AutoModpack!";
-        public String nagClickableMessage = "Click here to get the AutoModpack!";
+        public String nagMessage = "This server provides dedicated modpack through SuitelandUpdater!";
+        public String nagClickableMessage = "Click here to get the SuitelandUpdater!";
         public String nagClickableLink = "https://modrinth.com/project/automodpack";
         public String bindAddress = "";
         public int bindPort = -1;

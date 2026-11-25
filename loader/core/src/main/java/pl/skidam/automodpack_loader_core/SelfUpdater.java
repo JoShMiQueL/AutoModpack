@@ -51,7 +51,7 @@ public class SelfUpdater {
         try {
             currentVersion = SemanticVersion.parse(AM_VERSION);
         } catch (IllegalArgumentException e) {
-            LOGGER.error("Current installed AutoModpack version is corrupt/invalid: " + AM_VERSION);
+            LOGGER.error("Current installed SuitelandUpdater version is corrupt/invalid: " + AM_VERSION);
             return false;
         }
 
@@ -60,7 +60,7 @@ public class SelfUpdater {
 
         if (gettingServerVersion) {
             if (serverModpackContent.automodpackVersion.equals(AM_VERSION)) {
-                LOGGER.info("AutoModpack is up-to-date with server version: {}", serverModpackContent.automodpackVersion);
+                LOGGER.info("SuitelandUpdater is up-to-date with server version: {}", serverModpackContent.automodpackVersion);
                 return false;
             }
 
@@ -69,10 +69,10 @@ public class SelfUpdater {
                 return false;
             }
 
-            LOGGER.info("Syncing AutoModpack to server version: {}", serverModpackContent.automodpackVersion);
+            LOGGER.info("Syncing SuitelandUpdater to server version: {}", serverModpackContent.automodpackVersion);
             modrinthAPIList.add(ModrinthAPI.getModSpecificVersion(AUTOMODPACK_ID, serverModpackContent.automodpackVersion, serverModpackContent.mcVersion));
         } else {
-            LOGGER.info("Checking if AutoModpack is up-to-date...");
+            LOGGER.info("Checking if SuitelandUpdater is up-to-date...");
             modrinthAPIList = ModrinthAPI.getModInfosFromID(AUTOMODPACK_ID);
         }
 
@@ -106,7 +106,7 @@ public class SelfUpdater {
             // Never replace a newer installed client with the server's older
             // AutoModpack jar. The server may be an old compatible 4.0.x server.
             if (gettingServerVersion && comparison <= 0) {
-                LOGGER.info("Keeping installed AutoModpack {} instead of server version {}.",
+                LOGGER.info("Keeping installed SuitelandUpdater {} instead of server version {}.",
                         AM_VERSION, rawRemoteVersion);
                 return false;
             }
@@ -157,7 +157,7 @@ public class SelfUpdater {
      */
     public static boolean validUpdate(SemanticVersion remoteVersion) {
         if (remoteVersion.compareTo(MINIMUM_SAFE_VERSION) < 0) {
-            LOGGER.error("Downgrading AutoModpack to version {} is strongly discouraged/disabled due to security concerns (Target is older than 4.0.0 Stable).", remoteVersion);
+            LOGGER.error("Downgrading SuitelandUpdater to version {} is strongly discouraged/disabled due to security concerns (Target is older than 4.0.0 Stable).", remoteVersion);
             return false;
         }
         return true;
@@ -169,15 +169,15 @@ public class SelfUpdater {
 
         try {
             DownloadManager downloadManager = new DownloadManager();
-            new ScreenManager().download(downloadManager, "AutoModpack " + automodpack.fileVersion());
+            new ScreenManager().download(downloadManager, "SuitelandUpdater " + automodpack.fileVersion());
 
             downloadManager.download(
                     automodpackUpdateJar,
                     automodpack.SHA1Hash(),
                     automodpack.fileSize(),
                     List.of(automodpack.downloadUrl()),
-                    () -> LOGGER.info("Downloaded update for AutoModpack."),
-                    () -> LOGGER.error("Failed to download update for AutoModpack.")
+                    () -> LOGGER.info("Downloaded update for SuitelandUpdater."),
+                    () -> LOGGER.error("Failed to download update for SuitelandUpdater.")
             );
 
             downloadManager.joinAll();
@@ -190,7 +190,7 @@ public class SelfUpdater {
 
             Runnable callback = () -> {
                 CustomFileUtils.executeOrder66(THIS_MOD_JAR);
-                LOGGER.info("Successfully updated AutoModpack! Restarting...");
+                LOGGER.info("Successfully updated SuitelandUpdater! Restarting...");
             };
 
             CustomFileUtils.copyFile(automodpackUpdateJar, newAutomodpackJar);

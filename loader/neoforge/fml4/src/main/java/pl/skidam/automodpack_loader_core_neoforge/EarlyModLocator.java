@@ -18,7 +18,7 @@ public class EarlyModLocator implements IModFileCandidateLocator {
     @Override
     public void findCandidates(ILaunchContext context, IDiscoveryPipeline pipeline) {
 
-        ProgressMeter progress = StartupNotificationManager.prependProgressBar("[Automodpack] Preload", 0);
+        ProgressMeter progress = StartupNotificationManager.prependProgressBar("[SuitelandUpdater] Preload", 0);
         new Preload();
         progress.complete();
 
@@ -37,7 +37,7 @@ public class EarlyModLocator implements IModFileCandidateLocator {
             }
         } catch (Throwable t) {
             pl.skidam.automodpack_core.GlobalVariables.LOGGER.warn(
-                    "[Automodpack] self-container injection failed", t);
+                    "[SuitelandUpdater] self-container injection failed", t);
         }
 
         for (Path path : ModpackLoader.modsToLoad) {
