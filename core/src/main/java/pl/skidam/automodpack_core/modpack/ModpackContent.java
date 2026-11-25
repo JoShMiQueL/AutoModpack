@@ -291,9 +291,19 @@ public class ModpackContent {
                 LOGGER.info("File {} is server mod! Skipping...", formattedFile);
                 return null;
             }
-            // Suiteland fork: do NOT exclude AutoModpack itself. The pack may ship the fork build in
-            // mods/ like any other mod; the client force-copies it next to the running jar and the
-            // forced restart swaps it in.
+            // Suiteland fork: NEVER ship the updater jar itself in the pack. The client already runs
+            // this exact jar — shipping it means the sync copies it next to the running jar as
+            // .new.jar (which nothing ever swaps in) and the next boot loads BOTH jars, exploding
+            // the JPMS module resolution with duplicate package exports. Players install the updater
+            // by hand once; updater updates are announced on Discord.
+            if (THIS_MOD_JAR != null && file.equals(THIS_MOD_JAR)) {
+                LOGGER.info("File {} is the updater itself! Skipping...", formattedFile);
+                return null;
+            }
+            if (file.getFileName().toString().startsWith("suiteland-updater-")) {
+                LOGGER.info("File {} is an updater jar! Skipping...", formattedFile);
+                return null;
+            }
         } else if (formattedFile.contains("/config/")) {
             type = "config";
         } else if (formattedFile.contains("/shaderpacks/")) {
