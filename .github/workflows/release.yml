@@ -39,6 +39,7 @@ jobs:
     with:
       version: ${{ inputs.version }}
       release-please: false
+      prerelease: false   # el '-' de suiteland.N auto-marcaria prerelease; latest solo ve full releases
       release-title: "Suiteland Updater {version}"
       contributors: false
       release-notes: |
@@ -104,6 +105,10 @@ jobs:
             echo "attaching $jar"
             gh release upload "$tag" "$jar" --clobber --repo "${{ github.repository }}"
           done
+
+          # el reusable upstream marca prerelease por el '-' de suiteland.N y no
+          # admite override negativo — se corrige aqui: esta es una release full
+          gh release edit "$tag" --prerelease=false --repo "${{ github.repository }}" || true
 
   # Tras releasear, master debe llevar la version nueva en gradle.properties
   sync-version:
