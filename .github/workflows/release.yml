@@ -107,8 +107,10 @@ jobs:
           done
 
           # el reusable upstream marca prerelease por el '-' de suiteland.N y no
-          # admite override negativo — se corrige aqui: esta es una release full
-          gh release edit "$tag" --prerelease=false --repo "${{ github.repository }}" || true
+          # admite override negativo — se corrige aqui via API: esta es full release
+          rel_id=$(gh api "repos/${{ github.repository }}/releases/tags/$tag" --jq '.id')
+          gh api -X PATCH "repos/${{ github.repository }}/releases/$rel_id" -F prerelease=false \
+            --jq '.tag_name + " prerelease=" + (.prerelease|tostring)' || true
 
   # Tras releasear, master debe llevar la version nueva en gradle.properties
   sync-version:
