@@ -39,7 +39,6 @@ jobs:
     with:
       version: ${{ inputs.version }}
       release-please: false
-      prerelease: false   # el '-' de suiteland.N auto-marcaria prerelease; latest solo ve full releases
       release-title: "Suiteland Updater {version}"
       contributors: false
       release-notes: |
